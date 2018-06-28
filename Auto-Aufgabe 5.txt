@@ -1,0 +1,78 @@
+Diese Aufgabe hat ziemlich viel Text, aber keine Angst. Das meiste sind Erklärungen.
+
+
+Jetzt bauen wir für unsere Auto-Unterklassen ebenfalls parameterlose Konstruktoren. Sie sollen den String automarke, den sie von 
+"Auto" erben, auf ihre Eigenmarke setzen, und ihrem speziellen Feld einen Wert zuweisen. Zum Beispiel:
+
+	Audi() {
+		setAutomarke("Audi");
+		istArschlochDrin = true;
+	}
+
+Die Methode setAutomarke() funktioniert, da die Oberklasse "Auto" sie besitzt.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Jetzt wird es Zeit für ein etwas komplizierteres Java-Konzept:
+	
+	Polymorphie.
+
+Es ist eigentlich absolut logisch: Ein Audi ist ein Auto. Versetzen wir uns in jemanden hinein, der keine Ahnung von Autos hat - 
+für ihn wäre ein Audi nur irgendein Auto, und er wüsste nichts über die speziellen Eigenschaften, beim Audi zum Beispiel den Umstand, 
+dass oft Arschlöcher drinsitzen.
+
+Java kann auch so tun, als sei es dumm. Es kann nämlich Unterklassen (z.B. Audi oder Mercedes) als stinknormale Autos betrachten.
+Wir können zum Beispiel sagen:
+
+	Auto audi1 = new Audi()
+
+Somit haben wir einen Audi, von dem Java aber nur sieht, dass es ein Auto ist. Also können wir nur auf Methoden zugreifen, die das 
+normale Auto auch besitzt. So können wir weder den Arschloch-Setter noch den entsprechenden Getter verwenden.
+
+Das mag jetzt auf den ersten Blick eher sinnlos wirken, bedeutet aber, dass wir einen Audi immer als bloßes Auto betrachten dürfen.
+Hätten wir jetzt zum Beispiel eine Klasse "Fähre" und diese hätte einen Platz für ein "Auto", könnten wir sowohl Audi als auch Smart
+draufsetzen, ohne Extraplätze für jede Unterklasse anlegen zu müssen.
+
+Baue testweise zwei verschiedene Audis:
+	- Einen ganz normal mit 
+		Audi audi1 = new Audi();
+
+	- den anderen mit 
+		Auto audi2 = new Audi();
+
+
+Du erinnerst dich an die Klasse "Fähre", die ich eben erwähnt habe?
+Die bauen wir jetzt. Nur nennen wir sie "Faehre", um Eclipse nicht zu verwirren. Umlaute sind immer so eine Sache.
+
+	- Die Klasse Faehre braucht ein Feld vom Typ Auto ("geparktesAuto" oder sowas).
+	- Dazu eine Methode "public void autoParken()", die im grunde nur ein Setter für das Autofeld sein soll.
+	- Dann eine Methode "public void welchesAuto()", die die Automarke des geparkten Autos ausgibt. Sie sollte auch einen null-check
+	  besitzen, um Nullpointer-Exceptions aus dem Weg zu gehen, falls noch kein Auto geparkt wurde.
+	  (Falls du damit Schwierigkeiten hast, gibts ganz unten einen Spoiler.)
+
+
+Lösche also nach deinen Tests mal wieder den Inhalt deiner main, und erzeuge dort stattdessen eine Fähre und eine Auto-Unterklasse deiner
+Wahl.
+Nutze dann die autoParken()-Methode der Fähre, um dein Auto darauf abzustellen.
+Sobald du das getan hast, lass dir mit "welchesAuto()" die Bezeichnung des Autos ausgeben, um zu schauen, ob es das Richtige ist.
+
+
+
+--------------------
+--------------------
+
+SPOILER:
+
+
+
+
+	public void welchesAuto() {
+		if (geparktesAuto == null) {
+			System.out.println("Es wurde noch kein Auto geparkt!");
+			return;
+		}
+		System.out.println(geparktesAuto.getAutomarke());
+	}
